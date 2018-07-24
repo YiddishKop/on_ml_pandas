@@ -1,0 +1,70 @@
+#+TITLE: 100 QandA of pandas
+
+* 100 QandA of pandas
+** how to create a df from a dict
+   #+BEGIN_SRC ipython :session :exports both :async t :results raw drawer
+In [35]: dict(x = [1,2,3], y=[4,5,6], z=[True,True,False])
+Out[85]: {'x': [1, 2, 3], 'y': [4, 5, 6], 'z': [True, True, False]}
+
+In [86]: import pandas as pd
+
+In [90]: pd.DataFrame(dict(x = [1,2,3], y=[4,5,6], z=[True,True,False]))
+Out[102]:
+   x  y      z
+0  1  4   True
+1  2  5   True
+2  3  6  False
+
+   #+END_SRC
+** how to conver .xls to .csv in pandas
+   #+BEGIN_EXAMPLE
+   pd.read_excel([filename],[ith_sheet], index_col=None)
+   ---> datafram
+   -----.to_csv([filename],encoding, index=False)
+   ---> dataframe
+   #+END_EXAMPLE
+
+   #+BEGIN_SRC ipython :session :exports both :async t :results raw drawer
+import pandas as pd
+data_xls = pd.read_excel('excelfile.xlsx', 'Sheet2', index_col=None)
+data_xls.to_csv('csvfile.csv', encoding='utf-8', index=False)
+   #+END_SRC
+
+** how to read .xls or .csv
+
+#+BEGIN_SRC ipython :session :exports code :async t :results raw drawer
+import pandas as pd
+csv_df = pd.read_csv('filepath')
+xsl_df = pd.read_excel('filepath', 'sheetname')
+#+END_SRC
+** 4 new time-saving tricks in pandas
+** how do I apply a function to a pandas Series or DataFrame
+** how do I apply multiple filter criteria to a pandas DataFrame
+** how do I avoid a SettingWithCopyWarning in pandas
+** how do I change display options in pandas
+** how do I change the data type of a pandas Series
+** how do I create a pandas DataFrame from another object
+** how do I create dummy variables in pandas
+** how do I explore a pandas Series
+** how do I filter rows of panda DataFrame by column value
+** how do I find and remove duplicate rows in pandas
+** how do I handle missing values in pandas
+** how do I make my pandas DataFrame smaller and faster
+** how do I read a tabular data file into pandas
+** how do I remove columns from a pandas DataFrame
+** how do I rename columns in a pandas DataFrame
+** how do I select a pandas Series from a DataFrame
+** how do I select multiple rows and columns from a pandas DataFrame
+** how do I sort a pandas DataFrame or a Series
+** how do I use pandas with scikit-learn to create Kaggle submissions
+** how do I use string methods in pandas
+** how do I use the axis parameter in pandas
+** how do I work with dates and times in pandas
+** more of your pandas questions answered
+** what do I need to know about the pandas index
+** what do I need to know about the pandas index
+** what is your favorite pandas tricks
+** when should I use a groupby in pandas
+** when should I use the inplace parameter in pandas
+** why do some pandas commands end with parentheses
+** your pandas questions answered
