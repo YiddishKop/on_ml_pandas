@@ -1,3 +1,19 @@
+# -*- org-export-babel-evaluate: nil -*-
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:python :session Pandas 笔记一
+#+PROPERTY: header-args:ipython :session Pandas 笔记一
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/home/yiddi/git_repos/YIDDI_org_export_theme/theme/org-nav-theme_cache.css" >
+#+HTML_HEAD: <script src="https://hypothes.is/embed.js" async></script>
+#+HTML_HEAD: <script type="application/json" class="js-hypothesis-config">
+#+HTML_HEAD: <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:nil html-preamble:t
+#+OPTIONS: H:3 num:t ^:nil _:nil tags:not-in-toc
+#+TITLE: Pandas 笔记一
+#+AUTHOR: yiddishkop
+#+EMAIL: [[mailto:yiddishkop@163.com][yiddi's email]]
+#+TAGS: {PKGIMPT(i) DATAVIEW(v) DATAPREP(p) GRAPHBUILD(b) GRAPHCOMPT(c)} LINAGAPI(a) PROBAPI(b) MATHFORM(f) MLALGO(m)
+
+
 * Intro to pandas, part-I
 #+NAME: readInData
 #+HEADER: :session
@@ -161,9 +177,10 @@ drop( 'row/col Name', axis=0 )  ===> drop row
 drop( 'row/col Name', axis=1 )  ===> drop column
 
 *** pull out rows
-    ONE row and column you pull out from a DataFrame is of ~pandas.core.series.Series~ type
-    Multiple rows and columns you pull out from a DataFrame is of ~pandas.core.frame.DataFrame~ type
-**** pull out ONE row
+    ONE row and column you pull out from a DataFrame is of
+    ~pandas.core.series.Series~ type; Multiple rows and columns you pull out
+    from a DataFrame is of ~pandas.core.frame.DataFrame~ type
+*** pull out ONE row
 #+NAME: pullOutRowsByloc
 #+HEADER: :session
 #+BEGIN_SRC python :results output
@@ -230,7 +247,7 @@ print (df.ix[0])
 : gdpPercap        779.445
 : Name: 0, dtype: object
 
-**** pull out MANY row
+*** pull out MANY row
 #+NAME: pullOutMultiRowsByix
 #+HEADER: :session
 #+BEGIN_SRC python :results output
@@ -880,7 +897,6 @@ Name: lifeExp, dtype: float64
    2  a10  b10  c10  d10
    3  a11  b11  c11  d11
    #+end_example
-
 
 *** concate([df1,def2,...]) + loc
     ~concat()~ don't require files match each other, they don't have to be in the same order.
@@ -1807,7 +1823,7 @@ religion  <$10k  $10-20k  $20-30k  $30-40k  $40-50k  \
 17      528       407        321    258                 597
 #+end_example
 
-**** make horizontal spreading vertical by ~pd.melt~
+*** make horizontal spreading vertical by ~pd.melt~
      ~melt~ make horizon vertically
      #+NAME: meltxxxxx
      #+HEADER: :session
@@ -2048,7 +2064,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
 [5 rows x 81 columns]
 #+end_example
 
-**** make horizontal spreading vertical by ~pd.melt~
+*** make horizontal spreading vertical by ~pd.melt~
      ~melt~ make horizon vertically
      #+NAME: handle the time-period as column name
      #+HEADER: :session
@@ -2665,7 +2681,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
     [122 rows x 18 columns]
     #+end_example
 
-**** tidy operation step 1: ~Series.str + melt = get new column~
+*** tidy operation step 1: ~Series.str + melt = get new column~
 
      ~Series.str~ can be used to *access the values of the series as strings* and apply several methods to it. These can be accessed like ~Series.str.<function/property>~.
 
@@ -2765,7 +2781,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
      <class 'pandas.core.series.Series'>
      #+end_example
 
-**** tidy operation step 2: assign new column to original dataframe
+*** tidy operation step 2: assign new column to original dataframe
      1. add this Series as a new column to original dataframe:
         ~df['columnName'] = Series~
 
@@ -2845,7 +2861,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
      #+end_example
 
 *** Series.str model
-**** a general method using ~series.str~ + ~df.melt~
+*** a general method using ~series.str~ + ~df.melt~
      A general method to use ~Series.str~ is :
      1. handle Series as a String to get a new better Seires:
         ~Series~ ---.str---> ~StringMethods~ ---<.strmethod>---> ~Series~
@@ -2859,7 +2875,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
      .                                                     v
      .                                 df ['giveName'] = _____
      #+END_QUOTE
-**** combine multiple ~.str~ model expressions
+*** combine multiple ~.str~ model expressions
      ~Series.str~ can be used to *access the values of the series as strings* and *apply several methods* to it.
      These can be accessed like ~Series.str.<function/property>~.
 
@@ -2876,7 +2892,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
      by ~Series.str.split().str.get(index)~
      #+END_QUOTE
 
-**** ~.str.split('_', expand=True)~
+*** ~.str.split('_', expand=True)~
      |------------------------------+-----------|
      | method                       | return    |
      |------------------------------+-----------|
@@ -2988,7 +3004,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
      1951  NaN  NaN        NaN    NaN     NaN     Mali    NaN  Deaths
      #+end_example
 
-**** how to rename the column name of a dataframe
+*** how to rename the column name of a dataframe
 
                 0       1
      0      Cases  Guinea
@@ -3018,7 +3034,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
     we should clean the format to make the
     1. melt all columns *d1 to d31* as values of column *day*
     2. *tmax* and *tmin* the *column name*
-**** 0. read in dataset to be a dataframe
+*** 0. read in dataset to be a dataframe
     #+HEADER: :session
     #+BEGIN_SRC python :results output
       weather = pd.read_csv(file_path + 'weather.csv')
@@ -3078,7 +3094,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
     [22 rows x 35 columns]
     #+end_example
 
-**** 1. melt all columns *d1 to d31* as values of column *day*
+*** 1. melt all columns *d1 to d31* as values of column *day*
      #+HEADER: :session
      #+BEGIN_SRC python :results output
        weather_melt = pd.melt(weather, id_vars=['id', 'year', 'month', 'element'], var_name='day', value_name='temp')
@@ -3092,7 +3108,7 @@ year        artist                    track  time date.entered  wk1   wk2  \
      : 2  MX17004  2010      2    tmax  d1   NaN
      : 3  MX17004  2010      2    tmin  d1   NaN
      : 4  MX17004  2010      3    tmax  d1   NaN
-**** 2. *tmax* and *tmin* the *column name*
+*** 2. *tmax* and *tmin* the *column name*
      para ~index~ of ~pd.pivot_table()~  is like the para ~id_vars~ of ~pd.melt()~, specifying the column you don't want change
      #+HEADER: :session
      #+BEGIN_SRC python :results output
